@@ -1,0 +1,46 @@
+openapi: 3.1.0
+info:
+  title: Merry API
+  version: 0.1.0
+  description: Monolithic API for the gr4nd-line project.
+servers:
+  - url: http://localhost:8081
+    description: Local environment
+paths:
+  /merry:
+    get:
+      summary: Checks API availability
+      operationId: getHealth
+      responses:
+        '200':
+          description: API is available
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+              example:
+                message: ok
+                app_name: merry
+                timestamp: '2026-08-17T12:00:00Z'
+components:
+  schemas:
+    HealthResponse:
+      type: object
+      required:
+        - message
+        - app_name
+        - timestamp
+      properties:
+        message:
+          type: string
+          description: Health check result.
+          example: ok
+        app_name:
+          type: string
+          description: Application name.
+          example: merry
+        timestamp:
+          type: string
+          format: date-time
+          description: Time at which the response was generated, in RFC 3339 format.
+          example: '2026-08-17T12:00:00Z'
